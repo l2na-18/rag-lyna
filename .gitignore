@@ -1,0 +1,8 @@
+.env
+faiss_index/
+venv/
+__pycache__/
+*.wav
+*.mp3
+.ipynb_checkpoints/
+.DS_Store

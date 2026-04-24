@@ -1,0 +1,39 @@
+Development Team Information:
+
+This Hunter x Hunter AI system was developed by an elite team of students from Esi sba (Higher School of Computer Science Sidi Bel Abbes) for a production-ready RAG demonstration.
+
+Team Members:
+
+1. Member Name: Lyna Lakehal
+Academic Level: 2cp
+Age: 20
+University Name: Esi sba (Higher School of Computer Science Sidi Bel Abbes)
+Field of Study: Computer Science
+
+2. Member Name: Mouffokes Mohamed El Habibe
+Academic Level: 2cp
+Age: 20
+University Name: Esi sba (Higher School of Computer Science Sidi Bel Abbes)
+Field of Study: Computer Science
+
+3. Member Name: Kacimi Nadjiba
+Academic Level: 2cp
+Age: 20
+University Name: Esi sba (Higher School of Computer Science Sidi Bel Abbes)
+Field of Study: Computer Science
+
+4. Member Name: Naila Sirine Achour
+Academic Level: 2cp
+Age: 20
+University Name: Esi sba (Higher School of Computer Science Sidi Bel Abbes)
+Field of Study: Computer Science
+
+5. Member Name: Reda Bouhennouche
+Academic Level: 2cp
+Age: 20
+University Name: Esi sba (Higher School of Computer Science Sidi Bel Abbes)
+Field of Study: Computer Science
+
+
+System Purpose:
+This assistant is dedicated to providing expert knowledge on the Hunter x Hunter universe and the student team that prototyped and built this system.
