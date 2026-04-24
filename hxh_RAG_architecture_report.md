@@ -1,45 +1,54 @@
-# Hunter × Hunter RAG Chatbot: Architecture & Implementation Report
-
-## Executive Summary
-This project presents a Retrieval-Augmented Generation (RAG) conversational AI specialized in the *Hunter × Hunter* (HxH) universe. The system integrates deep domain lore with high-performance character statistics and development team metadata, providing an expert-level interface for fans and judges alike. Built using a modern technical stack—including LangChain, Streamlit, and Google Gemini—the chatbot features native multimodal capabilities (STT/TTS and Vision) and strict domain guardrails.
-
-## 1. Technical Architecture
-The system follows a classic RAG pattern, augmented for multimodal interaction:
-
-*   **Logic Layer**: LangChain orchestrates the retrieval and generation phases.
-*   **Vector Engine**: FAISS (Facebook AI Similarity Search) provides high-speed semantic retrieval.
-*   **Embeddings**: Google `gemini-embedding-2` transforms text chunks into 3072-dimensional vector space.
-*   **Reasoning Model**: Google `gemini-flash-lite-latest` handles contextual synthesis and conversation flow.
-*   **User Interface**: Streamlit provides a responsive, production-ready frontend for web browsers.
-
-## 2. Knowledge Base & Data Ingestion
-The chatbot's expertise is derived from three primary data pillars:
-1.  **General Domain Lore**: Comprehensive summaries of Nen systems, world geography (The Dark Continent), and arc histories.
-2.  **Character Combat Stats**: A specialized dataset (sourced from HxH-stats) containing numerical values for STR, SPD, INT, and NEN for over 80 major and minor characters.
-3.  **Team Metadata**: Specific profiles for the development team at **Esi sba** (Higher School of Computer Science Sidi Bel Abbes).
-
-### Processing Pipeline
-*   **Chunking**: Documents were split using `RecursiveCharacterTextSplitter` into 1000-token segments with a 100-token overlap to maintain table consistency and context.
-*   **History Awareness**: A standalone question generator reformulates user queries based on chat memory to ensure follow-up questions (e.g., "What about his Nen type?") remain semantically accurate.
-
-## 3. Bonus Features & Multimodal Integration
-To exceed the standard RAG requirements, the following modules were added:
-
-*   **🖼️ LLM Vision Recognition**: Users can upload images of HxH characters. The model performs zero-shot character identification before responding.
-*   **🎙️ Native Speech-to-Text**: Integration with `st.audio_input` allows users to record voice queries, which are processed by Gemini’s native audio understanding.
-*   **🔊 Automatic Text-to-Speech**: Responses are dynamically converted to MP3 format via the `gTTS` library and played back automatically, creating an immersive experience.
-
-## 4. Privacy, Licensing & Alignment
-*   **Domain Alignment**: A rigid system prompt acts as a hard guardrail, forcing the model to politely refuse non-HxH or non-team-related topics (e.g., general world history, other anime, or coding help).
-*   **Data Integrity**: Used CC-licensed and fan-curated data sources with appropriate attribution.
-*   **Team Privacy**: Only relevant academic and professional information regarding the Esi sba team is exposed through the RAG context.
-
-## 5. Deployment Guide
-The system is optimized for **Streamlit Community Cloud**.
-1.  **Repository Structure**: Optimized for one-click deployment.
-2.  **Environment**: Controlled via `.env` for secure API key management.
-3.  **Persistence**: The FAISS index is stored locally but can be regenerated dynamically if the knowledge base expands.
+# Hunter x Hunter RAG Chatbot: Architecture & Implementation Report
+**By: The Esi sba Student Team**
 
 ---
-**Prepared by the Esi sba Development Team**  
-*Lyna Lakehal, Mouffokes Mohamed El Habibe, Kacimi Nadjiba, Naila Sirine Achour, Reda Bouhennouche.*
+
+## 1. Project Overview
+The **Hunter x Hunter AI Assistant** is a specialized, interactive application designed to serve as a high-fidelity knowledge base for the *Hunter x Hunter* universe. Unlike generic chatbots, this system was built to provide accurate, lore-specific answers while offering a multimodal experience that includes image recognition and voice interaction.
+
+---
+
+## 2. System Architecture
+Our system follows a **Modular RAG (Retrieval-Augmented Generation)** architecture. This was designed to keep the application lightweight and responsive, specifically for hosting on Streamlit Community Cloud.
+
+### A. Data Layer
+The foundation of the bot is its knowledge base, consisting of structured text files containing:
+- **Character Stats**: Detailed breakdowns of Nen types and combat ratings.
+- **Lore Summaries**: Plot points, location details, and organization bios (like the Phantom Troupe).
+- **Team Information**: Biographies of the student development team.
+
+### B. The Search Engine (Local Intelligence)
+To avoid the instability of external API search calls, we implemented a custom-built search algorithm:
+- **Technology**: We used `Scikit-Learn` to convert our lore into a mathematical "search space" right on the server.
+- **Precision**: When a user asks a question, the system uses **Cosine Similarity** to instantly find the most relevant paragraphs. This ensures the bot "reads" the right information before it even starts thinking of an answer.
+
+---
+
+## 3. Implementation Details
+
+### A. Multimodal Processing (Images & Voice)
+One of the core challenges was processing different types of information without slowing down the app:
+1. **Image Recognition**: Using the `Gemini-1.5-Flash` vision engine, the bot analyzes character designs in real-time. It can identify subtle visual cues (like Killua’s electric sparks) to determine which specific power is being shown.
+2. **Audio Pipeline**: We integrated `gTTS` for voice output and Streamlit’s audio widgets for input. This allows for a "hands-free" educational experience for the user.
+
+### B. The Identity & Safety Framework
+We implemented two layers of "Safety Checks" to keep the bot professional:
+- **Identity Override**: The bot is programmed to prioritize our team biography whenever asked about its origins.
+- **Domain Refusal**: To keep the project focused, we added a rule that politely blocks questions about real-world politics or non-HxH topics. This is handled by a specialized **System Prompt** that governs every interaction.
+
+---
+
+## 4. Deployment & Performance Optimization
+Hosting an AI model on a free tier like Streamlit Cloud required significant optimization:
+- **Memory Management**: We removed heavy libraries like Torch and Tensorflow, replacing them with lightweight alternatives like `Numpy` and `Scikit-Learn`. This dropped the app's boot time from minutes to under 30 seconds.
+- **Error Resilience**: We added "Try-Except" blocks at every critical stage. If a specific API call fails, the bot is programmed to provide a helpful response instead of crashing, ensuring a smooth user experience.
+
+---
+
+## 5. Summary of Technologies
+- **Front-End**: Streamlit (Python-based Web Framework)
+- **Mind (LLM)**: Google Gemini 1.5 Flash
+- **Memory (RAG)**: Scikit-Learn TF-IDF & Numpy
+- **Senses**: Google Generative AI (Vision) & gTTS (Voice)
+
+---
